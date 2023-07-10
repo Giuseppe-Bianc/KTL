@@ -1,0 +1,8 @@
+
+rootProject.name = 'KTL'
+
+buildCache {
+    local {
+        enabled = true
+    }
+}
