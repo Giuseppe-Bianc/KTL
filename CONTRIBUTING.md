@@ -73,7 +73,7 @@ When making commits, please follow these guidelines for clear and informative co
 
 ## License
 
-By contributing to this project, you agree that your contributions will be licensed under the [LICENSE](https://github.com/[your-username]/[your-project]/blob/main/LICENSE) file of this repository.
+By contributing to this project, you agree that your contributions will be licensed under the [LICENSE](https://github.com/Giuseppe-Bianc/KTL/blob/master/LICENSE) file of this repository.
 
 ---
 
