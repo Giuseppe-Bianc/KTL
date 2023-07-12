@@ -1,5 +1,7 @@
 package org.dersbian
 
+import java.util.*
+
 const val code = """x = 2
 var x
 var y
@@ -20,3 +22,9 @@ var u_mod5 = 10.22E+2
 var norm = function(u{:}) -> scalar { return sqrt(dot(u, u)); }
 <end>
 """
+
+fun Char.printASCIIAndUNICODEValues() {
+    val code = this.code
+    val hex = String.format("%04x", code).uppercase(Locale.getDefault())
+    println("in valore di $this in ASCII: $code e Unicode: U+$hex")
+}

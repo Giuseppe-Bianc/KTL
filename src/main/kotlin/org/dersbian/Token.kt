@@ -9,6 +9,9 @@ sealed class Token(open val type: String, open val line: Int, open val column: I
             override fun toString(): String = "Real(value=$value, line=$line, column=$column)"
         }
     }
+    data class EOF(override val line: Int, override val column: Int) : Token("EOF", line, column){
+        override fun toString(): String = "EOF(line=$line, column=$column)"
+    }
     data class Operator(val operator: Char,override val line: Int, override val column: Int) : Token("Operator", line, column){
         override fun toString(): String ="Operator(operator='$operator', line=$line, column=$column)"
     }

@@ -49,13 +49,8 @@ class Lexer(private inline val input: String) {
                 }
             }
         }
+        tokens.add(Token.EOF(line, column))
         return tokens
-    }
-
-    private fun Char.printASCIIAndUNICODEValues() {
-        val code = this.code
-        val hex = String.format("%04x", code).uppercase(Locale.getDefault())
-        println("in valore di $this in ASCII: $code e Unicode: U+$hex")
     }
 
     private fun handleIdentifierOrKeyword() {
