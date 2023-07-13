@@ -8,7 +8,7 @@ class Lexer(private inline val input: String) {
         "val", "var", "fun", "if",
         "else", "when", "is", "for",
         "while", "return", "null", "true",
-        "false",  "this", "super", "class",
+        "false", "this", "super", "class",
         "interface", "object", "package", "import",
         "function"
     )
@@ -21,29 +21,32 @@ class Lexer(private inline val input: String) {
     fun lex(): List<Token> {
         while (index < inputLen) {
             when (val char = input[index]) {
-                '+','-','*','(',')','=',':','{','}',',','<','>','.','[',']',';' -> {
+                '+', '-', '*', '(', ')', '=', ':', '{', '}', ',', '<', '>', '.', '[', ']', ';', '^' -> {
                     tokens.add(Token.Operator(char, line, column))
                     index++
                     column++
                 }
-                '/' ->handleCommentOrSlash(char)
+
+                '/' -> handleCommentOrSlash(char)
                 '"' -> handleStrings()
                 in '0'..'9' -> handleNumber()
                 in 'a'..'z', in 'A'..'Z' -> handleIdentifierOrKeyword()
-                '\r'->{
-                    if (index < inputLen && input[index+1] == '\n'){
-                        index+=2
-                        line+=2
+                '\r' -> {
+                    if (index < inputLen && input[index + 1] == '\n') {
+                        index += 2
+                        line += 2
                         column = 1
                     }
                 }
+
                 '\n' -> {
                     index++
                     line++
                     column = 1
                 }
+
                 else -> {
-                    require(char.isWhitespace()) {  "Carattere non valido: $char (linea: $line, colonna: $column)" }
+                    require(char.isWhitespace()) { "Carattere non valido: $char (linea: $line, colonna: $column)" }
                     index++
                     column++
                 }
@@ -81,6 +84,7 @@ class Lexer(private inline val input: String) {
                     line++
                     column = 1
                 }
+
                 else -> {
                     stringBuilder.append(input[index])
                     column++
@@ -108,6 +112,7 @@ class Lexer(private inline val input: String) {
             column++
         }
     }
+
     private fun handleNumber() {
         val start = index
         val number: Number
@@ -140,6 +145,7 @@ class Lexer(private inline val input: String) {
             column++
         }
     }
-    private fun isValidChar(c: Char): Boolean =  c.isLetterOrDigit() || c == '_'
+
+    private fun isValidChar(c: Char): Boolean = c.isLetterOrDigit() || c == '_'
     private fun Char.isWS(): Boolean = StringUtils.isWhitespace(this.toString())
 }
